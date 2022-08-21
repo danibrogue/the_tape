@@ -1,0 +1,23 @@
+[
+  {
+    "pk": 1,
+    "model": "base.Category",
+    "fields": {
+      "title": "Другое"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "base.Category",
+    "fields": {
+      "title": "Обзор творчества"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "base.Category",
+    "fields": {
+      "title": "Об артисте"
+    }
+  }
+]

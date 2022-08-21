@@ -1,0 +1,35 @@
+[
+  {
+    "pk": 1,
+    "model": "base.Article",
+    "fields": {
+      "headline": "Статья 1",
+      "brief": "Краткое описание статьи.",
+      "text": "Здесь будет текст",
+      "publish_date": "2020-08-21",
+      "category": 1
+    }
+  },
+  {
+    "pk": 2,
+    "model": "base.Article",
+    "fields": {
+      "headline": "Статья 2",
+      "brief": "Краткое описание статьи.",
+      "text": "Здесь будет текст",
+      "publish_date": "2020-08-21",
+      "category": 2
+    }
+  },
+  {
+    "pk": 3,
+    "model": "base.Article",
+    "fields": {
+      "headline": "Статья 3",
+      "brief": "Краткое описание статьи.",
+      "text": "Здесь будет текст",
+      "publish_date": "2020-08-21",
+      "category": 3
+    }
+  }
+]
