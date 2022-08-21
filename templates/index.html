@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex flex-column mx-3">
+    <h3 class="mt-2">Тексты</h3>
+    <div class="row row-cols-3">
+        {% for i in '012345'|make_list %}
+            <div class="col my-2">
+                <div class="p-3 h-100 border border-secondary rounded bg-light">
+                    <b>Lorem ipsum dolor</b>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse congue diam est</p>
+                    <p class="mt-2">8/21/2022</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
