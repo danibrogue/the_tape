@@ -3,9 +3,13 @@ from django.http import HttpResponse
 
 
 # Create your views here.
+from base.models import Article
+
 
 def index(request):
-    return HttpResponse('homepage')
+    articles = Article.objects.order_by('publish_date')[:4]
+    context = {'articles': articles}
+    return render(request, 'index.html', context)
 
 
 def new(request):
@@ -13,7 +17,7 @@ def new(request):
 
 
 def show(request):
-    return HttpResponse('show article')
+    return render(request, 'show.html')
 
 
 def edit(request):
