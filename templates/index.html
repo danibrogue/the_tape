@@ -13,7 +13,9 @@
     <div class="row row-cols-3">
         {% for article in articles %}
             <div class="col my-2">
-                <div class="p-3 h-100 border border-secondary rounded bg-light">
+                <div class="p-3 h-100 border border-secondary rounded bg-light"
+                     onclick="location.href='{% url "show" article.id %}';"
+                     style="cursor: pointer;">
                     <b>{{ article.headline }}</b>
                     <p>{{ article.brief }}</p>
                     <p class="mt-2">{{ article.publish_date|date:'m/d/Y' }}</p>
