@@ -12,7 +12,9 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-light ">
-        <div class="navbar-brand h3 mx-3">The Tape</div>
+        <a class="text-decoration-none link-dark"
+           href="{% url 'index' %}"><div class="navbar-brand h3 mx-3">The Tape</div>
+        </a>
         <ul class="navbar-nav">
             {% for category in categories %}
                 <li class="nav-item">
