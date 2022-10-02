@@ -3,12 +3,26 @@ from django.http import HttpResponse
 
 
 # Create your views here.
-from base.models import Article
+from base.models import Article, Category
 
 
 def index(request):
     articles = Article.objects.order_by('publish_date')[:4]
-    context = {'articles': articles}
+    categories = Category.objects.all()
+    context = {
+        'articles': articles,
+        'categories': categories
+    }
+    return render(request, 'index.html', context)
+
+
+def category(request, pk):
+    chosen_category = Category.objects.get(pk=pk)
+    articles = Article.objects.filter(category=chosen_category)
+    context = {
+        'articles': articles,
+        'chosen_category': chosen_category
+    }
     return render(request, 'index.html', context)
 
 

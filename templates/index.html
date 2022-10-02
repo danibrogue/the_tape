@@ -2,7 +2,11 @@
 
 {% block content %}
 <div class="d-flex flex-column mx-3">
-    <h3 class="mt-2">Тексты</h3>
+    {% if chosen_category %}
+        <h3 class="mt-2">{{ chosen_category.title }}</h3>
+    {% else %}
+        <h3 class="mt-2">Тексты</h3>
+    {% endif %}
     <div class="row row-cols-3">
         {% for article in articles %}
             <div class="col my-2">
