@@ -2,11 +2,14 @@
 
 {% block content %}
 <div class="d-flex flex-column mx-3">
-    {% if chosen_category %}
-        <h3 class="mt-2">{{ chosen_category.title }}</h3>
-    {% else %}
-        <h3 class="mt-2">Тексты</h3>
-    {% endif %}
+    <div class="d-flex flex-row">
+        {% if chosen_category %}
+            <h3 class="mt-2">{{ chosen_category.title }}</h3>
+        {% else %}
+            <h3 class="mt-2">Тексты</h3>
+        {% endif %}
+        <div><a href="{% url 'new' %}" type="button" class="btn btn-outline-dark mx-4 mt-2">Добавить</a></div>
+    </div>
     <div class="row row-cols-3">
         {% for article in articles %}
             <div class="col my-2">

@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from .forms import ArticleForm
 
 
 # Create your views here.
@@ -28,7 +29,14 @@ def category(request, pk):
 
 
 def new(request):
-    return HttpResponse('new article')
+    form = ArticleForm()
+    if request.method == 'POST':
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    context = {"form": form}
+    return render(request, 'new.html', context)
 
 
 def show(request, pk):

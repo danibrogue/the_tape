@@ -11,8 +11,9 @@
     <title>Title</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-light ">
-        <a class="text-decoration-none link-dark"
+    <nav class="d-flex justify-content-between navbar navbar-expand-lg bg-light">
+        <div class="d-flex flex-row">
+            <a class="text-decoration-none link-dark"
            href="{% url 'index' %}"><div class="navbar-brand h3 mx-3">The Tape</div>
         </a>
         <ul class="navbar-nav">
@@ -22,6 +23,11 @@
                 </li>
             {% endfor %}
         </ul>
+        </div>
+
+{#        <div class="d-flex flex-row">#}
+{#            <a type="button" class="btn btn-outline-dark mx-2">Добавить</a>#}
+{#        </div>#}
     </nav>
     {% block content %}
     {% endblock %}
