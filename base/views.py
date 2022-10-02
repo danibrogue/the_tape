@@ -5,10 +5,11 @@ from django.http import HttpResponse
 # Create your views here.
 from base.models import Article, Category
 
+categories = Category.objects.all()
+
 
 def index(request):
     articles = Article.objects.order_by('publish_date')[:4]
-    categories = Category.objects.all()
     context = {
         'articles': articles,
         'categories': categories
@@ -30,8 +31,13 @@ def new(request):
     return HttpResponse('new article')
 
 
-def show(request):
-    return render(request, 'show.html')
+def show(request, pk):
+    chosen_article = Article.objects.get(pk=pk)
+    context = {
+        'article': chosen_article,
+        'categories': categories
+    }
+    return render(request, 'show.html', context)
 
 
 def edit(request):
