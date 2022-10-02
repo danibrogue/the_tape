@@ -48,8 +48,16 @@ def show(request, pk):
     return render(request, 'show.html', context)
 
 
-def edit(request):
-    return HttpResponse('edit article')
+def edit(request, pk):
+    chosen_article = Article.objects.get(pk=pk)
+    form = ArticleForm(instance=chosen_article)
+    if request.method == 'POST':
+        form = ArticleForm(request.POST, instance=chosen_article)
+        if form.is_valid():
+            form.save()
+            return redirect('show', pk=pk)
+    context = {"form": form}
+    return render(request, 'new.html', context)
 
 
 def delete(request):

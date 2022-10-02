@@ -9,6 +9,7 @@
         </div>
         <b>{{ article.brief }}</b>
         <p>{{ article.text }}</p>
+        <a href="{% url 'edit' article.id %}" type="button" class="btn btn-outline-dark">Редактировать</a>
     </div>
 </div>
 {% endblock %}
