@@ -23,7 +23,8 @@ def category(request, pk):
     articles = Article.objects.filter(category=chosen_category)
     context = {
         'articles': articles,
-        'chosen_category': chosen_category
+        'chosen_category': chosen_category,
+        'categories': categories
     }
     return render(request, 'index.html', context)
 
