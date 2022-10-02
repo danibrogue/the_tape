@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>
+        <form method="post" action="">
+            {% csrf_token %}
+            <p>Вы уверены, что хотите удалить {{ obj }} ?</p>
+            <a href="{% url 'show' obj.id %}">Назад</a>
+            <input type="submit" value="Подтвердить">
+        </form>
+    </div>
+{% endblock %}

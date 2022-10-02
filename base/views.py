@@ -61,5 +61,10 @@ def edit(request, pk):
     return render(request, 'new.html', context)
 
 
-def delete(request):
-    return HttpResponse('delete article')
+def delete(request, pk):
+    chosen_article = Article.objects.get(pk=pk)
+    if request.method == 'POST':
+        chosen_article.delete()
+        return redirect("index")
+    context = {"obj": chosen_article}
+    return render(request, 'delete.html', context)
