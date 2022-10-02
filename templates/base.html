@@ -11,8 +11,17 @@
     <title>Title</title>
 </head>
 <body>
-    <nav class="d-flex justify-content-between navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg bg-light ">
         <div class="navbar-brand h3 mx-3">The Tape</div>
+        <ul class="navbar-nav">
+            {% for category in categories %}
+                <li class="nav-item">
+                    <a class="nav-link link-dark" href="{% url 'category' category.id %}">{{ category.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
     </nav>
+    {% block content %}
+    {% endblock %}
 </body>
 </html>
