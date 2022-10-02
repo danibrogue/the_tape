@@ -9,7 +9,7 @@ categories = Category.objects.all()
 
 
 def index(request):
-    articles = Article.objects.order_by('publish_date')[:4]
+    articles = Article.objects.order_by('-publish_date')[:6]
     context = {
         'articles': articles,
         'categories': categories
