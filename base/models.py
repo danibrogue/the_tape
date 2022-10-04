@@ -11,7 +11,7 @@ class Category(models.Model):
 
 
 class Article(models.Model):
-    headline = models.CharField(max_length=30)
+    headline = models.CharField(max_length=150)
     brief = models.CharField(max_length=300)
     text = models.TextField(max_length=25000)
     publish_date = models.DateTimeField(auto_now=True)
