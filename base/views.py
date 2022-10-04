@@ -10,7 +10,10 @@ categories = Category.objects.all()
 
 
 def index(request):
-    articles = Article.objects.order_by('-publish_date')[:6]
+    query = request.GET.get('query') if request.GET.get('query') is not None else ''
+
+    # articles = Article.objects.order_by('-publish_date')[:6]
+    articles = Article.objects.filter(category__article__headline__contains=query).order_by('-publish_date')[:6]
     context = {
         'articles': articles,
         'categories': categories
@@ -19,8 +22,10 @@ def index(request):
 
 
 def category(request, pk):
+    query = request.GET.get('query') if request.GET.get('query') is not None else ''
     chosen_category = Category.objects.get(pk=pk)
-    articles = Article.objects.filter(category=chosen_category)
+    category_articles = Article.objects.filter(category=chosen_category)
+    articles = category_articles.filter(category__article__headline__contains=query).order_by('-publish_date')[:6]
     context = {
         'articles': articles,
         'chosen_category': chosen_category,

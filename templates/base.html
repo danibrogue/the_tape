@@ -24,10 +24,11 @@
             {% endfor %}
         </ul>
         </div>
-
-{#        <div class="d-flex flex-row">#}
-{#            <a type="button" class="btn btn-outline-dark mx-2">Добавить</a>#}
-{#        </div>#}
+        <div>
+            <form method="get">
+                <input class="mx-3 mt-2" name="query" type="text" placeholder="Поиск">
+            </form>
+        </div>
     </nav>
     {% block content %}
     {% endblock %}

@@ -11,6 +11,9 @@
         <div><a href="{% url 'new' %}" type="button" class="btn btn-outline-dark mx-4 mt-2">Добавить</a></div>
     </div>
     <div class="row row-cols-3">
+        {% if articles.count == 0 %}
+            <p class="mt-4">По вашему запросу ничего не найдено</p>
+        {% endif %}
         {% for article in articles %}
             <div class="col my-2">
                 <div class="p-3 h-100 border border-secondary rounded bg-light"
