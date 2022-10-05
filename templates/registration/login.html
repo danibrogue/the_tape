@@ -10,17 +10,10 @@
             <input class="form-control" type="text" name="username" id="id_username">
 
             <label class="form-label mt-3" for="id_password">Пароль</label>
-            <input class="form-control" type="text" name="password" id="id_password">
+            <input class="form-control" type="password" name="password" id="id_password">
 
             <input class="mt-3 btn btn-primary w-50" type="submit" value="Подтвердить">
         </form>
-        {% if messages %}
-            <ul class="messages">
-                {% for msg in messages %}
-                    <li {% if msg.tags %} class="{{ msg.tags }}" {% endif %}>{{ msg }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
     </div>
     </div>
 {% endblock %}

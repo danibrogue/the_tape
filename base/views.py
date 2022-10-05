@@ -85,6 +85,7 @@ def login(request):
             user = User.objects.get(username=username)
         except:
             messages.error(request, 'Пользователь не найден')
+            return render(request, 'registration/login.html')
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
@@ -92,6 +93,7 @@ def login(request):
             return redirect('index')
         else:
             messages.error(request, 'Неверный пароль')
+            return render(request, 'registration/login.html')
 
     return render(request, 'registration/login.html')
 
