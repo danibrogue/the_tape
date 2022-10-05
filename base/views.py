@@ -1,7 +1,9 @@
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import ArticleForm
-
+from django.contrib import messages
 
 # Create your views here.
 from base.models import Article, Category
@@ -72,3 +74,28 @@ def delete(request, pk):
         return redirect("index")
     context = {"obj": chosen_article}
     return render(request, 'delete.html', context)
+
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        try:
+            user = User.objects.get(username=username)
+        except:
+            messages.error(request, 'Пользователь не найден')
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            auth_login(request, user)
+            return redirect('index')
+        else:
+            messages.error(request, 'Неверный пароль')
+
+    return render(request, 'registration/login.html')
+
+
+def logout(request):
+    auth_logout(request)
+    return redirect('index')
