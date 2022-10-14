@@ -1,8 +1,9 @@
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import ArticleForm
+from .forms import ArticleForm, NewUserForm
 from django.contrib import messages
 
 # Create your views here.
@@ -96,6 +97,21 @@ def login(request):
             return render(request, 'registration/login.html')
 
     return render(request, 'registration/login.html')
+
+
+def register(request):
+    form = NewUserForm()
+    if request.method == 'POST':
+        form = NewUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.username = user.username.lower()
+            # user.save()
+            auth_login(request, user)
+            return redirect('index')
+        else:
+            messages.error(request, 'Возникли проблемы с регистрацией')
+    return render(request, 'registration/register.html', {'form': form})
 
 
 def logout(request):
