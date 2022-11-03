@@ -126,5 +126,6 @@ def logout(request):
     return redirect('index')
 
 
+@unauthenticated_user
 def profile(request):
     return render(request, 'profile.html')
