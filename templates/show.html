@@ -11,7 +11,7 @@
         <b>{{ article.brief }}</b>
         <p>{{ article.text }}</p>
 
-        {% if not request.user|in_group:"guest" %}
+        {% if not request.user|in_group:"guest" and request.user.is_authenticated %}
             <a href="{% url 'edit' article.id %}" type="button" class="btn btn-outline-dark">Редактировать</a>
             <a href="{% url 'delete' article.id %}" type="button" class="btn btn-outline-danger mx-2">Удалить</a>
         {% endif %}
