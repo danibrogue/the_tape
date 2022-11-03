@@ -8,7 +8,7 @@ from django.contrib import messages
 
 # Create your views here.
 from base.models import Article, Category
-from .decorators import unauthenticated_user, allowed_users
+from .decorators import unauthenticated_user, allowed_users, authenticated_user
 
 categories = Category.objects.all()
 
@@ -126,6 +126,6 @@ def logout(request):
     return redirect('index')
 
 
-@unauthenticated_user
+@authenticated_user
 def profile(request):
     return render(request, 'profile.html')
