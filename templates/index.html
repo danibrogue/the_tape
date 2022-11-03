@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load tags %}
 
 {% block content %}
 <div class="d-flex flex-column mx-3">
@@ -8,7 +9,9 @@
         {% else %}
             <h3 class="mt-2">Тексты</h3>
         {% endif %}
-        <div><a href="{% url 'new' %}" type="button" class="btn btn-outline-dark mx-4 mt-2">Добавить</a></div>
+        {% if not request.user|in_group:"guest" %}
+            <div><a href="{% url 'new' %}" type="button" class="btn btn-outline-dark mx-4 mt-2">Добавить</a></div>
+        {% endif %}
     </div>
     <div class="row row-cols-3">
         {% if articles.count == 0 %}
@@ -22,8 +25,10 @@
                     <b>{{ article.headline }}</b>
                     <p>{{ article.brief }}</p>
                     <p class="mt-2">{{ article.publish_date|date:'m/d/Y' }}</p>
-                    <a href="{% url 'edit' article.id %}" type="button" class="btn btn-outline-dark">Редактировать</a>
-                    <a href="{% url 'delete' article.id %}" type="button" class="btn btn-outline-danger mx-2">Удалить</a>
+                    {% if not request.user|in_group:"guest" %}
+                        <a href="{% url 'edit' article.id %}" type="button" class="btn btn-outline-dark">Редактировать</a>
+                        <a href="{% url 'delete' article.id %}" type="button" class="btn btn-outline-danger mx-2">Удалить</a>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}

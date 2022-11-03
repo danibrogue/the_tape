@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load tags %}
 
 {% block content %}
 <div class="d-flex flex-column mx-3">
@@ -9,8 +10,11 @@
         </div>
         <b>{{ article.brief }}</b>
         <p>{{ article.text }}</p>
-        <a href="{% url 'edit' article.id %}" type="button" class="btn btn-outline-dark">Редактировать</a>
-        <a href="{% url 'delete' article.id %}" type="button" class="btn btn-outline-danger mx-2">Удалить</a>
+
+        {% if not request.user|in_group:"guest" %}
+            <a href="{% url 'edit' article.id %}" type="button" class="btn btn-outline-dark">Редактировать</a>
+            <a href="{% url 'delete' article.id %}" type="button" class="btn btn-outline-danger mx-2">Удалить</a>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import ArticleForm, NewUserForm
@@ -8,6 +8,7 @@ from django.contrib import messages
 
 # Create your views here.
 from base.models import Article, Category
+from .decorators import unauthenticated_user, allowed_users
 
 categories = Category.objects.all()
 
@@ -36,6 +37,7 @@ def category(request, pk):
     return render(request, 'index.html', context)
 
 
+@allowed_users(allowed_roles=['admin'])
 def new(request):
     form = ArticleForm()
     if request.method == 'POST':
@@ -56,6 +58,7 @@ def show(request, pk):
     return render(request, 'show.html', context)
 
 
+@allowed_users(allowed_roles=['admin'])
 def edit(request, pk):
     chosen_article = Article.objects.get(pk=pk)
     form = ArticleForm(instance=chosen_article)
@@ -68,6 +71,7 @@ def edit(request, pk):
     return render(request, 'new.html', context)
 
 
+@allowed_users(allowed_roles=['admin'])
 def delete(request, pk):
     chosen_article = Article.objects.get(pk=pk)
     if request.method == 'POST':
@@ -77,6 +81,7 @@ def delete(request, pk):
     return render(request, 'delete.html', context)
 
 
+@unauthenticated_user
 def login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -99,6 +104,7 @@ def login(request):
     return render(request, 'registration/login.html')
 
 
+@unauthenticated_user
 def register(request):
     form = NewUserForm()
     if request.method == 'POST':
@@ -106,7 +112,8 @@ def register(request):
         if form.is_valid():
             user = form.save()
             user.username = user.username.lower()
-            # user.save()
+            group = Group.objects.get(name='guest')
+            user.groups.add(group)
             auth_login(request, user)
             return redirect('index')
         else:
