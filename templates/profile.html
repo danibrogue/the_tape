@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load tags %}
+
+{% block content %}
+    <div class="d-flex flex-column mx-3">
+        <h2>Профиль</h2>
+        <div>
+            <h5 class="mt-2">Имя пользователя: {{ request.user }}</h5>
+            {% if request.user|in_group:"guest" %}
+                <p>Роль: Гость</p>
+            {% else %}
+                <p>Роль: Администратор</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

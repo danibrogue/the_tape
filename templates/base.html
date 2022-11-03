@@ -41,7 +41,7 @@
                 </li>
                 <li class="nav-item">
                     {% if request.user.is_authenticated %}
-                        <a class="nav-link link-dark mx-2" type="button"><b>{{ user.username }}</b></a>
+                        <a href="{% url 'profile' %}" class="nav-link link-dark mx-2" type="button"><b>{{ user.username }}</b></a>
                     {% endif %}
                 </li>
             </ul>

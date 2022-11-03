@@ -124,3 +124,7 @@ def register(request):
 def logout(request):
     auth_logout(request)
     return redirect('index')
+
+
+def profile(request):
+    return render(request, 'profile.html')
