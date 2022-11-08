@@ -129,3 +129,7 @@ def logout(request):
 @authenticated_user
 def profile(request):
     return render(request, 'profile.html')
+
+
+def newsletter(request):
+    return render(request, 'newsletter.html')
