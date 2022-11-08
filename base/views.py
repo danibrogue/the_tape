@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import ArticleForm, NewUserForm
+from .forms import ArticleForm, NewUserForm, NewsletterForm
 from django.contrib import messages
 
 # Create your views here.
@@ -132,4 +132,10 @@ def profile(request):
 
 
 def newsletter(request):
-    return render(request, 'newsletter.html')
+    form = NewsletterForm()
+    if request.method == 'POST':
+        form = NewsletterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    return render(request, 'newsletter.html', {'form': form})
