@@ -1,13 +1,16 @@
+import django.core.mail
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+
+from the_tape import settings
 from .forms import ArticleForm, NewUserForm, NewsletterForm
 from django.contrib import messages
 
 # Create your views here.
-from base.models import Article, Category
+from base.models import Article, Category, Subscriber
 from .decorators import unauthenticated_user, allowed_users, authenticated_user
 
 categories = Category.objects.all()
@@ -139,3 +142,15 @@ def newsletter(request):
             form.save()
             return redirect('index')
     return render(request, 'newsletter.html', {'form': form})
+
+
+@allowed_users(allowed_roles=['admin'])
+def mailing(request):
+    if request.method == 'POST':
+        django.core.mail.send_mail(
+            request.POST.get('topic'),
+            request.POST.get('message'),
+            settings.EMAIL_HOST_USER,
+            Subscriber.objects.all(),
+        )
+    return render(request, 'mailing.html')

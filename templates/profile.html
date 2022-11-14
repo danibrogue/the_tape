@@ -10,6 +10,9 @@
                 <p>Роль: Гость</p>
             {% else %}
                 <p>Роль: Администратор</p>
+                <a href="{% url 'mailing' %}" class="btn btn-outline-dark" type="button">
+                    Перейти к рассылке
+                </a>
             {% endif %}
         </div>
     </div>

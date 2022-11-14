@@ -13,5 +13,6 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('register/', views.register, name='register'),
     path('profile/', views.profile, name='profile'),
-    path('newsletter/', views.newsletter, name='newsletter')
+    path('newsletter/', views.newsletter, name='newsletter'),
+    path('mailing/', views.mailing, name='mailing')
 ]
